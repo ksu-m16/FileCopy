@@ -33,6 +33,9 @@ public class Main {
 		byte[] b = new byte[1024];
 
 		while (is.available() > 0) {
+			if (is.available() < b.length) {
+				b = new byte[is.available()];
+			}
 			is.read(b);
 			os.write(b);
 			
