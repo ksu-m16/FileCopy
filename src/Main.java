@@ -19,27 +19,56 @@ public class Main {
 	 * @param args
 	 * @throws IOException 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
 		File f = new File("E:\\MyDocuments\\My\\tm\\2.jpg");
 		File targetFile = new File(f.getAbsolutePath() + "_copy.jpg");
 			
-		InputStream is = new FileInputStream(f);
-		OutputStream os = new FileOutputStream(targetFile);
+		InputStream is = null;
+		OutputStream os = null;
 		
-		byte[] b = new byte[1024];
-
-		while (is.available() > 0) {
-			if (is.available() < b.length) {
-				b = new byte[is.available()];
-			}
-			is.read(b);
-			os.write(b);
+		try {
+			is = new FileInputStream(f);
+			os = new FileOutputStream(targetFile);
 			
+			byte[] b = new byte[1024*1024];
+
+			while (is.available() > 0) {
+				if (is.available() < b.length) {
+					b = new byte[is.available()];
+				}
+				is.read(b);
+				os.write(b);
+			}
+		
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		is.close();
-		os.close();
+		finally {
+			try {
+				if (is != null) {
+					is.close();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				os.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+
 		
 	}
 
