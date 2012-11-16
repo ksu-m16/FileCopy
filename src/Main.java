@@ -27,23 +27,16 @@ public class Main {
 		InputStream is = new FileInputStream(f);
 		OutputStream os = new FileOutputStream(targetFile);
 		
-//		BufferedReader r = new BufferedReader(new InputStreamReader(is));
-//		PrintWriter w = new PrintWriter(new BufferedWriter(new FileWriter(targetFile)));
-		
-//		byte[] b = new byte[1024];
+		byte[] b = new byte[1024];
 
-//		while (is.available() > 0) {
-//			if (is.available() < b.length) {
-//				b = new byte[is.available()];
-//			}
-//			is.read(b);
-//			os.write(b);
-//			
-//		}
-		
-		byte[] b = new byte[is.available()];
-		is.read(b);
-		os.write(b);
+		while (is.available() > 0) {
+			if (is.available() < b.length) {
+				b = new byte[is.available()];
+			}
+			is.read(b);
+			os.write(b);
+			
+		}
 		
 		is.close();
 		os.close();
